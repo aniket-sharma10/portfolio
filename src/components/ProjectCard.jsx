@@ -102,14 +102,16 @@ const ProjectCard = ({ title, description, thumbnail, githubLink, demoLink }) =>
             alt="thumbnail"
           />
         </CardItem>
-        <div className="flex justify-between items-center mt-8">
-          <a
-            href={demoLink || "#"}
+        <div className={`flex ${demoLink ? 'justify-between' : 'justify-end'} items-center mt-8`}>
+          {demoLink && (
+            <a
+            href={demoLink}
             target='_blank'
             className="px-4 py-2 rounded-xl text-xs font-normal text-white cursor-pointer bg-transparent transition-colors duration-200 hover:bg-gray-800"
           >
             Try now →
           </a>
+          )}
           <button
             onClick={() => {
               window.open(githubLink, '_blank');
