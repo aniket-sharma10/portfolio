@@ -26,7 +26,7 @@ export const PROJECTS = [
     description: "Created a blog application for reading blogs, with CRUD operations restricted to the admin. Includes a light/dark mode option. Built with the MERN stack and Tailwind CSS. Frontend - React, Backend - Nodejs, Database - MongoDB",
     thumbnail: readers,
     githubLink: "https://github.com/aniket-sharma10/Readers-blog",
-    demoLink: "https://readers-blog.onrender.com/",
+    demoLink: "https://readers-aniket.vercel.app/",
   },
   {
     title: "Food Recipe",
