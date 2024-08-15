@@ -1,0 +1,10 @@
+{
+    "redirects": [
+      {
+        "source": "/_src",
+        "destination": "/",
+        "permanent": false
+      }
+    ]
+  }
+  
