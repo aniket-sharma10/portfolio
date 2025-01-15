@@ -23,7 +23,7 @@ export const PROJECTS = [
   },
   {
     title: "Readers",
-    description: "Created a blog application for reading blogs, with CRUD operations restricted to the admin. Includes a light/dark mode option. Built with the MERN stack and Tailwind CSS. Frontend - React, Backend - Nodejs, Database - MongoDB",
+    description: "Created a blog application where users can create, read, update, and delete their own blogs, explore blogs by others, and filter blogs by categories. Includes a light/dark mode toggle for enhanced user experience. Built with the MERN stack and styled using Tailwind CSS. Frontend - React, Backend - Node.js, Database - MongoDB.",
     thumbnail: readers,
     githubLink: "https://github.com/aniket-sharma10/Readers-blog",
     demoLink: "https://readers-aniket.vercel.app/",
