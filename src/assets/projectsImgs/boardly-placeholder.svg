@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#0f172a"/>
+  <g fill="#1e293b">
+    <rect x="160" y="200" width="280" height="360" rx="16"/>
+    <rect x="500" y="200" width="280" height="280" rx="16"/>
+    <rect x="840" y="200" width="280" height="200" rx="16"/>
+  </g>
+  <text x="640" y="130" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="48" font-weight="600" text-anchor="middle">Boardly</text>
+</svg>

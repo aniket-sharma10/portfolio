@@ -1,13 +1,12 @@
-import React from "react";
 import { AiOutlineMail } from "react-icons/ai";
-import { FaInstagram, FaLinkedin } from "react-icons/fa";
-import { FaSquareXTwitter } from "react-icons/fa6";
+import { FaLinkedin } from "react-icons/fa";
 import { ImLocation } from "react-icons/im";
+import { CONTACT, SOCIAL_LINKS } from "../data";
 
 const Contact = () => {
   return (
     <div className="border-b border-neutral-900 pb-24">
-      <h2 className="mt-20 mb-12 text-center text-3xl md:text-4xl font-bold">Let's Connect</h2>
+      <h2 className="mt-20 mb-12 text-center text-3xl md:text-4xl font-bold">Let&apos;s Connect</h2>
       <div className="flex justify-center">
         <div className="text-lg">
             <ul>
@@ -18,28 +17,12 @@ const Contact = () => {
                 <div>
                   <span className="font-semibold">Email:</span>{" "}
                   <a
-                    href="mailto:sharmaaniket094@gmail.com"
+                    href={`mailto:${CONTACT.email}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-blue-400"
                   >
-                    sharmaaniket094@gmail.com
-                  </a>
-                </div>
-              </li>
-              <li className="mt-6 flex items-center gap-3">
-                <div>
-                  <FaSquareXTwitter size="1.5rem" />
-                </div>
-                <div>
-                  <span className="font-semibold">DM on Twitter:</span>{" "}
-                  <a
-                    href="https://x.com/aniket_sharmaa_"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-400"
-                  >
-                    @aniket_sharmaa_
+                    {CONTACT.email}
                   </a>
                 </div>
               </li>
@@ -50,28 +33,12 @@ const Contact = () => {
                 <div>
                   <span className="font-semibold">DM on LinkedIn:</span>{" "}
                   <a
-                    href="https://linkedin.com/in/aniket-sharmaa10"
+                    href={SOCIAL_LINKS.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-blue-400"
                   >
-                    @aniket-sharmaa10
-                  </a>
-                </div>
-              </li>
-              <li className="mt-6 flex items-center gap-3">
-                <div>
-                  <FaInstagram size="1.5rem" />
-                </div>
-                <div>
-                  <span className="font-semibold">DM on Instagram:</span>{" "}
-                  <a
-                    href="https://www.instagram.com/aniket.priv/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-400"
-                  >
-                    @aniket.priv
+                    @{CONTACT.linkedinHandle}
                   </a>
                 </div>
               </li>
@@ -81,7 +48,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <span className="font-semibold">Address:</span>{" "}
-                  Delhi, India
+                  {CONTACT.location}
                 </div>
               </li>
             </ul>

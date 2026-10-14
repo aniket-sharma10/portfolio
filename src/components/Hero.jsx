@@ -1,4 +1,3 @@
-import React from "react";
 import hero from "../assets/hero.png";
 import { Typewriter } from "react-simple-typewriter";
 
@@ -13,7 +12,7 @@ function Hero() {
             </h1>
             <span className="bg-gradient-to-r from-pink-300 via-slate-500 to-purple-500 bg-clip-text text-2xl sm:text-4xl lg:text-5xl tracking-tight text-transparent">
               <Typewriter
-                words={["I am a Software Developer."]}
+                words={["I am a Full-Stack Developer."]}
                 cursor={true}
                 cursorStyle={<span className="text-purple-400">|</span>}
                 typeSpeed={40}

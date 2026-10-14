@@ -1,54 +1,110 @@
+import boardly from "../assets/projectsImgs/boardly-placeholder.svg"
 import shoppers from "../assets/projectsImgs/shoppers.png"
 import readers from "../assets/projectsImgs/readers.png"
 import foodRecipe from "../assets/projectsImgs/foodRecipe.png"
 import expense from "../assets/projectsImgs/expense.png"
 import weather from "../assets/projectsImgs/weather.png"
 
-export const ABOUT_TEXT = `Hi Everyone, I'm Aniket Sharma from Delhi, India. Graduating with a Bachelor's degree in computer applications, I've honed my skills in React, Node.js, Express, MongoDB, and MySQL. Continuously learning and driven by a passion for crafting efficient and user-friendly web applications, I am actively seeking opportunities to contribute and grow in an environment that fosters learning and collaboration.
+export const ABOUT_TEXT = `I'm a full-stack developer based in Delhi, India, working as a Software Developer (SDE-1) at Capital Compute. I build across the stack, from a Chrome screen-recording extension and FFmpeg-based video editing to serverless document workflows on AWS and retrieval pipelines built on OpenAI embeddings. Most of my work today is in TypeScript, React, Next.js, Node.js and AWS. Before that, I interned at To Let Globe, building property discovery features. I like owning a feature end to end, from the data model and APIs to the interface people use.`;
 
+export const EXPERIENCE = [
+  {
+    role: "Software Developer (SDE-1)",
+    company: "Capital Compute",
+    period: "June 2025 – Present",
+    location: "Remote",
+    points: [
+      "Built a Chrome screen-recording extension from scratch using browser capture APIs and MediaRecorder, with permission handling and multipart uploads to AWS S3.",
+      "Enhanced desktop recording and editing workflows for trimming, zoom effects and silence removal using Node.js, Prisma and FFmpeg.",
+      "Developed an AI video-generation pipeline combining generative models, speech synthesis and open-source Hugging Face models for lip sync and video processing.",
+      "Built serverless legal-document workflows on AWS Lambda, S3, SQS and Step Functions for structured extraction, docket enrichment, attorney briefings, tasks and legal drafts.",
+      "Developed legal-data ingestion using document chunking, OpenAI embeddings and indexed retrieval, so case strategies are grounded in case law and official legal sources.",
+    ],
+    tags: ["Node.js", "Prisma", "FFmpeg", "AWS Lambda", "S3", "SQS", "Step Functions", "OpenAI"],
+  },
+  {
+    role: "Full Stack Developer Intern",
+    company: "To Let Globe",
+    period: "April 2025 – June 2025",
+    location: "Remote",
+    points: [
+      "Built property discovery features including navigation, filtering, forms and image-upload workflows.",
+      "Improved form validation and upload handling to reduce submission errors.",
+    ],
+    tags: ["Next.js", "Node.js", "Express", "MongoDB"],
+  },
+];
 
+export const SKILLS = [
+  { category: "Languages", items: ["JavaScript", "TypeScript", "C++"] },
+  { category: "Frontend", items: ["React", "Next.js", "Zustand", "Tailwind CSS"] },
+  { category: "Backend", items: ["Node.js", "Express"] },
+  { category: "Databases", items: ["PostgreSQL", "MongoDB", "MySQL", "Prisma"] },
+  {
+    category: "Cloud & Tools",
+    items: ["AWS Lambda", "S3", "SQS", "Step Functions", "Git", "GitHub", "Electron"],
+  },
+];
 
-
-
-
-`;
-
+// Ordered newest to oldest
 export const PROJECTS = [
   {
+    title: "Boardly",
+    description: "A multi-tenant Kanban project management SaaS with organization-scoped boards, lists and cards, plus activity tracking. Drag-and-drop ordering persists through validated server actions and transactional database updates. Clerk Organizations handles authentication and workspace access, and a Razorpay upgrade flow with signed webhook verification lifts the free-tier board limit.",
+    tags: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Clerk", "Razorpay", "Tailwind CSS"],
+    thumbnail: boardly,
+    githubLink: "https://github.com/aniket-sharma10/boardly",
+    demoLink: "https://boardly-xi.vercel.app/",
+  },
+  {
     title: "Shoppers",
-    description: "Developed an ecommerce store with categories and filters for product browsing, integrated Razorpay for payments, and an admin panel for management. Frontend - React, Backend - Nodejs, Database - MongoDB",
+    description: "A full-stack e-commerce store with product categories and filters, Google sign-in, Razorpay payments and an admin panel for managing the store. Product images are uploaded to Firebase.",
+    tags: ["React", "Redux Toolkit", "Node.js", "Express", "MongoDB", "Razorpay", "Firebase", "Tailwind CSS"],
     thumbnail: shoppers,
     githubLink: "https://github.com/aniket-sharma10/e-commerce-store",
     demoLink: "https://shoppers-aniket.vercel.app/",
   },
   {
     title: "Readers",
-    description: "Created a blog application where users can perform CRUD operations on their own blogs, explore blogs by others, and filter blogs by categories. Includes a light/dark mode toggle for enhanced user experience. Frontend - React, Backend - Node.js, Database - MongoDB.",
+    description: "A blogging platform where users create, edit and delete their own posts, browse posts by others and filter by category, with a light/dark theme toggle.",
+    tags: ["React", "Redux Toolkit", "Node.js", "Express", "MongoDB", "Firebase", "Tailwind CSS"],
     thumbnail: readers,
     githubLink: "https://github.com/aniket-sharma10/Readers-blog",
     demoLink: "https://readers-aniket.vercel.app/",
   },
   {
-    title: "Food Recipe",
-    description: "Built an application providing recipes for various food dishes sourced from an external API. Users can search for and view detailed recipes, and add dishes to their favorites. Frontend - React",
-    thumbnail: foodRecipe,
-    githubLink: "https://github.com/aniket-sharma10/food-recipe",
-    demoLink: "",
-  },
-  {
-    title: "Expense tracker",
-    description: "Developed an Expense Tracker App for monitoring income and expenses, featuring interactive data visualization with ApexCharts. Utilized Chakra-UI for a responsive and intuitive user interface. Frontend - React, UI - Chakra-UI, Data Visualization - ApexCharts.",
+    title: "Expense Tracker",
+    description: "An app for tracking income and expenses, with charts that break down spending.",
+    tags: ["React", "Chakra UI", "ApexCharts"],
     thumbnail: expense,
     githubLink: "https://github.com/aniket-sharma10/expense-tracker",
     demoLink: "",
   },
   {
+    title: "Food Recipe",
+    description: "A recipe finder built on an external API, where users search dishes, view detailed recipes and save favorites.",
+    tags: ["React"],
+    thumbnail: foodRecipe,
+    githubLink: "https://github.com/aniket-sharma10/food-recipe",
+    demoLink: "",
+  },
+  {
     title: "Weather App",
-    description: "Developed a minimalistic Weather App using HTML, CSS, and JavaScript, providing users with current weather information based on location or user input. Designed for ease of use and quick access to weather updates.",
+    description: "A minimal weather app that shows current conditions for the user's location or a searched city.",
+    tags: ["HTML", "CSS", "JavaScript"],
     thumbnail: weather,
     githubLink: "https://github.com/aniket-sharma10/weather-app",
     demoLink: "",
   },
-  
-  
 ];
+
+export const SOCIAL_LINKS = {
+  github: "https://github.com/aniket-sharma10",
+  linkedin: "https://www.linkedin.com/in/aniket-sharmaa10/",
+};
+
+export const CONTACT = {
+  email: "sharmaaniket094@gmail.com",
+  linkedinHandle: "aniket-sharmaa10",
+  location: "Delhi, India",
+};

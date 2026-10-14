@@ -1,6 +1,5 @@
-import React from "react";
-import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
-import { FaSquareXTwitter } from "react-icons/fa6";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { SOCIAL_LINKS } from "../data";
 
 function Navbar() {
   return (
@@ -13,20 +12,11 @@ function Navbar() {
         </h5>
       </div>
       <div className="my-8 mx-3 sm:mx-8 flex items-center justify-center gap-3 sm:gap-5 text-2xl sm:text-3xl">
-        <a href="https://github.com/aniket-sharma10" target="_blank" className="cursor-pointer">
+        <a href={SOCIAL_LINKS.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="cursor-pointer">
           <FaGithub />
         </a>
-        <a
-          href="https://linkedin.com/in/aniket-sharmaa10" target="_blank"
-          className="cursor-pointer"
-        >
+        <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="cursor-pointer">
           <FaLinkedin />
-        </a>
-        <a href="https://x.com/aniket_sharmaa_" target="_blank" className="cursor-pointer">
-          <FaSquareXTwitter />
-        </a>
-        <a href="https://www.instagram.com/aniket.priv/" target="_blank" className="cursor-pointer">
-          <FaInstagram />
         </a>
       </div>
     </nav>
