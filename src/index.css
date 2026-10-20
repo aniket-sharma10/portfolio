@@ -38,8 +38,8 @@
     --ink-3: 133 140 158;          /* #858C9E, AA on canvas, surface and raised */
     --line: 34 39 51;              /* #222733 */
     --line-strong: 99 107 126;     /* #636B7E, 3:1 non-text */
-    --accent: 124 147 255;         /* #7C93FF electric blue */
-    --accent-2: 69 214 196;        /* #45D6C4 aqua, second gradient stop */
+    --accent: 164 123 255;         /* #A47BFF violet, AA text on canvas/surface/raised */
+    --accent-2: 214 120 255;       /* #D678FF orchid (= ribbon-2), second gradient stop */
     --ribbon-1: 132 69 255;        /* #8445FF hero ribbon purple, effect only, never text or UI */
     --ribbon-2: 214 120 255;       /* #D678FF hero ribbon orchid, effect only */
 }
@@ -57,7 +57,7 @@
     }
 }
 
-/* The legacy wrapper keeps the old wider container until Skills, Projects and Contact are rebuilt */
+/* The legacy wrapper keeps the old wider container until Projects and Contact are rebuilt */
 @media (min-width: 1280px) {
     .container {
       max-width: 1536px;

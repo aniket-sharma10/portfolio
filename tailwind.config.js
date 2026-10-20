@@ -64,6 +64,16 @@ export default {
         // Dark-surface "lift": a soft accent glow instead of a drop shadow
         glow: "0 0 0 1px rgb(var(--accent) / 0.25), 0 16px 40px -16px rgb(var(--accent) / 0.45)",
       },
+      // Skills pills drift 4px up and down; duration and delay are set per pill so they never move in sync
+      keyframes: {
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-4px)" },
+        },
+      },
+      animation: {
+        float: "float 6s ease-in-out infinite",
+      },
       transitionTimingFunction: {
         out: "cubic-bezier(0.2, 0.7, 0.2, 1)",
       },

@@ -4,8 +4,8 @@ import useTimelineProgress from "../hooks/useTimelineProgress";
 import TimelineEntry from "./TimelineEntry";
 import Section from "./ui/Section";
 
-// A vertical rail (centred on the 16px nodes, so 7px in) running from the first node to the last. An accent →
-// accent-2 beam fills it as the section scrolls up past 60% of the viewport; the beam has a thin white core, a
+// A vertical rail (centred on the 16px nodes, so 7px in) running from the first node to the last. A violet → orchid
+// (accent → accent-2) beam fills it as the section scrolls up past 60% of the viewport; the beam has a thin white core, a
 // white + accent glow, and a bright tip riding its end. The hook sizes the rail from the real node positions.
 function Experience() {
   const listRef = useRef(null);

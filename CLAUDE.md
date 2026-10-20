@@ -20,7 +20,7 @@ There is no test suite. Validate every change with `npm run lint` and `npm run b
 - `src/components/` — one component per section, plus `ProjectCard.jsx` (hand-rolled 3D tilt card: `CardContainer` / `CardBody` / `CardItem`).
 - `src/data/index.js` — all content: `ABOUT_TEXT`, `EXPERIENCE`, `SKILLS` (grouped), `PROJECTS` (newest first; `title`, `description`, `tags`, `thumbnail`, `githubLink`, `demoLink` — empty `demoLink` hides "Try now"), `SOCIAL_LINKS`, `CONTACT`. Resume is the source of truth for experience and project copy; don't invent claims or metrics.
 - `src/assets/` — `hero.png` and `projectsImgs/*.png`, imported as ES modules.
-- `src/index.css` — Tailwind directives, `@font-face` for self-hosted fonts in `public/fonts/` (Geist, Geist Mono, Instrument Serif), colour tokens as CSS variables, wider `.container` at ≥1280px (legacy sections only).
+- `src/index.css` — Tailwind directives, `@font-face` for self-hosted fonts in `public/fonts/` (Geist, Geist Mono, Instrument Serif), colour tokens as CSS variables, and a wider `.container` at ≥1280px (legacy sections only).
 - `tailwind.config.js` — design tokens (colours, fonts, type scale, spacing, radii, shadows, motion) mapped to the CSS variables.
 - `src/components/ui/` — shared primitives (`Section`, `SectionHeading`, `Container`, `Button`, `TextLink`, `Tag` (pill), `ExternalLink`); `src/components/effects/` — `WireRibbon` (hero), `Spotlight` (cursor glow); `src/components/TimelineEntry.jsx` — one Experience job; `src/hooks/` — `useActiveSection`, `useTimelineProgress`, `useRevealOnce`.
 
@@ -29,7 +29,7 @@ There is no test suite. Validate every change with `npm run lint` and `npm run b
 - Function components with default exports; one component per file in `src/components/`.
 - Styling is Tailwind utility classes inline in JSX; no CSS modules or component library in use. Dark "Night" theme from design tokens (`bg-canvas`, `text-ink`); see `docs/design-proposal.md` (Revision 3).
 - Icons come from `react-icons`. `react-simple-typewriter` is installed but no longer used. Components declare `propTypes` (`prop-types`), since lint enforces `react/prop-types`.
-- Content belongs in `src/data/index.js`, not hard-coded in components. `Technologies.jsx` maps skill names to `react-icons` icons, or to local logos in `src/assets/skills/` (Zustand, Step Functions) where react-icons has none; unmapped skills render as text-only tiles.
+- Content belongs in `src/data/index.js`, not hard-coded in components. `Technologies.jsx` maps skill names to `react-icons` icons, or to local logos in `src/assets/skills/` (Zustand, Step Functions) where react-icons has none; unmapped skills render as text-only tiles. Skills are open category groups (no card boxes): a semibold heading over a static underline that fades from violet through orchid to transparent, then floating pills with brand-coloured icons. Six groups (Languages, Frontend, Backend, Databases, Cloud & Tools, AI & LLMs) fill a 3×2 / 2×3 grid. Tailwind CSS was removed from Skills at the owner's request; the AI group is backed by the resume (OpenAI embeddings + chunking + indexed retrieval = RAG).
 - External links open in a new tab.
 
 ## Known state (as of Oct 2026)
@@ -56,7 +56,7 @@ Goal: a premium, modern, interactive developer portfolio with a distinctive visu
 
 - **Typography**: strong and deliberate — a defined type scale with clear hierarchy, comfortable line lengths (~60–75ch for prose), and restrained use of weights. Headings carry the design.
 - **Layout**: clean, balanced whitespace on a consistent grid; clear section rhythm; content-led rather than decoration-led.
-- **Color**: dark blue-black base with two accents (electric blue `accent`, aqua `accent-2`). Their gradient is reserved for the timeline beam and pill hover borders. The hero ribbon has its own effect-only tokens (`ribbon-1` purple, `ribbon-2` orchid) that never go on text or UI. Never gradient-filled text.
+- **Color**: dark blue-black base with two accents matched to the hero ribbon: violet `accent` (#A47BFF, AA as text) and orchid `accent-2` (#D678FF). Their gradient is reserved for the timeline beam, pill hover borders and the Skills heading underlines. The hero ribbon has its own effect-only tokens (`ribbon-1` purple, `ribbon-2` orchid) that never go on text or UI. Never gradient-filled text. Skills tiles use each technology's brand colour (the only hex values outside the tokens, kept in `Technologies.jsx` and each ≥3:1 on the tile); black logos fall back to `ink`.
 - **Design tokens**: define colors, type scale, spacing, radii, and shadows once (in `tailwind.config.js` theme extensions) and use them everywhere; no ad-hoc hex values or one-off sizes in components.
 - **Reusable components**: shared primitives (section wrapper/heading, button/link, tag, card) used across all sections so every section feels like part of one system. Don't give each section or element its own style.
 
@@ -69,7 +69,7 @@ Goal: a premium, modern, interactive developer portfolio with a distinctive visu
 
 - Subtle and purposeful: entrance reveals, hover/focus feedback, smooth transitions. Every animation should aid understanding or feedback, not exist purely for visual effect.
 - 3D or other advanced effects only where they genuinely improve the experience (e.g. a refined card tilt), never as decoration for its own sake.
-- Respect `prefers-reduced-motion`. No scroll-jacking, or motion that delays content. The only ambient effects are the hero wire ribbon (`src/components/effects/WireRibbon.jsx`, original WebGL; pauses off-screen and in hidden tabs, static under reduced motion) and a cursor spotlight; nothing loops next to body text.
+- Respect `prefers-reduced-motion`. No scroll-jacking, or motion that delays content. The only ambient effects are the floating Skills pills (4px drift, only while on screen, paused on hover, off under reduced motion), the hero wire ribbon (`src/components/effects/WireRibbon.jsx`, original WebGL; pauses off-screen and in hidden tabs, static under reduced motion) and a cursor spotlight; no other looping motion.
 
 ### Content and voice
 

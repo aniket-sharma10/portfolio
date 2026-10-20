@@ -25,10 +25,8 @@ function App() {
         <Hero />
         <About />
         <Experience />
+        <Technologies />
         <div className="legacy container mx-auto overflow-x-clip px-4 sm:px-8">
-          <div id="skills" className="scroll-mt-16">
-            <Technologies />
-          </div>
           <div id="projects" className="scroll-mt-16">
             <Projects />
           </div>

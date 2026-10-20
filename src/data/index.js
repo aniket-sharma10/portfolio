@@ -42,13 +42,15 @@ export const EXPERIENCE = [
 
 export const SKILLS = [
   { category: "Languages", items: ["JavaScript", "TypeScript", "C++"] },
-  { category: "Frontend", items: ["React", "Next.js", "Zustand", "Tailwind CSS"] },
+  { category: "Frontend", items: ["React", "Next.js", "Zustand"] },
   { category: "Backend", items: ["Node.js", "Express"] },
   { category: "Databases", items: ["PostgreSQL", "MongoDB", "MySQL", "Prisma"] },
   {
     category: "Cloud & Tools",
     items: ["AWS Lambda", "S3", "SQS", "Step Functions", "Git", "GitHub", "Electron"],
   },
+  // From the resume: OpenAI embeddings + document chunking + indexed retrieval (RAG)
+  { category: "AI & LLMs", items: ["OpenAI", "RAG"] },
 ];
 
 // Ordered newest to oldest
