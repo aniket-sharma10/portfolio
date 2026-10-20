@@ -16,30 +16,27 @@ There is no test suite. Validate every change with `npm run lint` and `npm run b
 
 ## Structure
 
-- `src/App.jsx` — page shell: fixed gradient background, then sections in order: Navbar → Hero → About → Experience → Technologies → Projects → Contact.
+- `src/App.jsx` — page shell: skip link, cursor `Spotlight`, `Navbar`, then `<main>` with Hero → About → Experience → Technologies (Skills) → Projects → Contact, then `Footer` (© year, Back to top, GitHub/LinkedIn).
 - `src/components/` — one component per section, plus `ProjectCard.jsx` (hand-rolled 3D tilt card: `CardContainer` / `CardBody` / `CardItem`).
-- `src/data/index.js` — all content: `ABOUT_TEXT`, `EXPERIENCE`, `SKILLS` (grouped), `PROJECTS` (newest first; `title`, `description`, `tags`, `thumbnail`, `githubLink`, `demoLink` — empty `demoLink` hides "Try now"), `SOCIAL_LINKS`, `CONTACT`. Resume is the source of truth for experience and project copy; don't invent claims or metrics.
-- `src/assets/` — `hero.png` and `projectsImgs/*.png`, imported as ES modules.
-- `src/index.css` — Tailwind directives, `@font-face` for self-hosted fonts in `public/fonts/` (Geist, Geist Mono, Instrument Serif), colour tokens as CSS variables, and a wider `.container` at ≥1280px (legacy sections only).
+- `src/data/index.js` — all content: `ABOUT_TEXT`, `EXPERIENCE`, `SKILLS` (grouped), `PROJECTS` (newest first; `title`, `description`, `tags`, `thumbnail`, `thumbnailSrcSet`, `thumbnailAlt`, `githubLink`, `demoLink` — empty `demoLink` hides "Try now"; the first project is featured, the next two primary, the rest compact; with a `demoLink`, the screenshot frame also links to the live site), `SOCIAL_LINKS`, `CONTACT`. Resume is the source of truth for experience and project copy; don't invent claims or metrics.
+- `src/assets/` — project screenshots as WebP at 800w/1600w (`projectsImgs/*-800.webp`, `*-1600.webp`, imported in `src/data/index.js`; the original PNGs are kept as sources), the Boardly placeholder SVG, and the now-unused `hero.png`.
+- `src/index.css` — Tailwind directives, `@font-face` for self-hosted fonts in `public/fonts/` (Geist, Geist Mono, Instrument Serif), colour tokens as CSS variables. Every section now uses the shared `Section`/`Container` layout; the legacy wrapper and `.container` override are gone.
 - `tailwind.config.js` — design tokens (colours, fonts, type scale, spacing, radii, shadows, motion) mapped to the CSS variables.
 - `src/components/ui/` — shared primitives (`Section`, `SectionHeading`, `Container`, `Button`, `TextLink`, `Tag` (pill), `ExternalLink`); `src/components/effects/` — `WireRibbon` (hero), `Spotlight` (cursor glow); `src/components/TimelineEntry.jsx` — one Experience job; `src/hooks/` — `useActiveSection`, `useTimelineProgress`, `useRevealOnce`.
 
 ## Conventions
 
 - Function components with default exports; one component per file in `src/components/`.
-- Styling is Tailwind utility classes inline in JSX; no CSS modules or component library in use. Dark "Night" theme from design tokens (`bg-canvas`, `text-ink`); see `docs/design-proposal.md` (Revision 3).
+- Styling is Tailwind utility classes inline in JSX; no CSS modules or component library in use. Dark "Night" theme from design tokens (`bg-canvas`, `text-ink`, etc.), defined once as CSS variables in `src/index.css` and mapped to Tailwind in `tailwind.config.js`.
 - Icons come from `react-icons`. `react-simple-typewriter` is installed but no longer used. Components declare `propTypes` (`prop-types`), since lint enforces `react/prop-types`.
 - Content belongs in `src/data/index.js`, not hard-coded in components. `Technologies.jsx` maps skill names to `react-icons` icons, or to local logos in `src/assets/skills/` (Zustand, Step Functions) where react-icons has none; unmapped skills render as text-only tiles. Skills are open category groups (no card boxes): a semibold heading over a static underline that fades from violet through orchid to transparent, then floating pills with brand-coloured icons. Six groups (Languages, Frontend, Backend, Databases, Cloud & Tools, AI & LLMs) fill a 3×2 / 2×3 grid. Tailwind CSS was removed from Skills at the owner's request; the AI group is backed by the resume (OpenAI embeddings + chunking + indexed retrieval = RAG).
 - External links open in a new tab.
 
 ## Known state (as of Oct 2026)
 
-- `npm run lint` fails on pre-existing errors in `Projects.jsx` and `ProjectCard.jsx` (rewritten in the Projects phase). Touched files should be lint-clean; `npm run build` passes.
-- Boardly uses a placeholder thumbnail (`src/assets/projectsImgs/boardly-placeholder.svg`) until a real screenshot is added. Project `tags` are in the data but not yet rendered by `ProjectCard`.
+- `npm run lint` passes with zero problems and `npm run build` passes; keep it that way.
+- Boardly uses a placeholder thumbnail (`src/assets/projectsImgs/boardly-placeholder.svg`, drawn in token colours) until the owner adds a real screenshot. When it's added: export WebP at 800w and 1600w, set `thumbnail`/`thumbnailSrcSet` like the other projects, and update `thumbnailAlt`. Projects render through `Projects.jsx` → `ProjectCard.jsx` (featured/primary/compact) → `ProjectFrame.jsx` (address bar + 16:10 screenshot).
 - `@nextui-org/react` and `framer-motion` are listed in `package.json` but not imported anywhere.
-- `ProjectCard`'s `CardItem` never receives the hover state, so its `translateZ` depth effects do nothing; only the container tilt works. The card body also has a typo'd class `md:[32rem]`.
-- Images are large unoptimized PNGs (`foodRecipe.png` ~1 MB, `hero.png` ~520 KB) with no lazy loading.
-- Accessibility gaps: section headings mix `h1`/`h2`, project images use `alt="thumbnail"`, the GitHub action is a `<button>` calling `window.open` instead of a link.
 - The README is still the Vite template boilerplate.
 
 ## Ground rules

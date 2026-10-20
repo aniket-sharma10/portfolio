@@ -38,6 +38,7 @@ export default {
         h2: ["clamp(2.25rem, 1.7rem + 2.2vw, 3.5rem)", { lineHeight: "1", letterSpacing: "-0.015em" }],
         h3: ["clamp(1.25rem, 1.1rem + 0.6vw, 1.625rem)", { lineHeight: "1.2", letterSpacing: "-0.01em" }],
         lead: ["clamp(1.125rem, 1rem + 0.4vw, 1.3125rem)", { lineHeight: "1.55" }],
+        callout: ["clamp(1.125rem, 0.2rem + 4.5vw, 2.5rem)", { lineHeight: "1.25", letterSpacing: "-0.01em" }], // contact email; sized so the address fits one line from 320px
         body: ["1rem", { lineHeight: "1.65" }],
         small: ["0.875rem", { lineHeight: "1.5" }],
         label: ["0.75rem", { lineHeight: "1.4", letterSpacing: "0.06em" }],

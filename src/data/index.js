@@ -1,11 +1,13 @@
 import boardly from "../assets/projectsImgs/boardly-placeholder.svg"
-import shoppers from "../assets/projectsImgs/shoppers.png"
-import readers from "../assets/projectsImgs/readers.png"
-import foodRecipe from "../assets/projectsImgs/foodRecipe.png"
-import expense from "../assets/projectsImgs/expense.png"
-import weather from "../assets/projectsImgs/weather.png"
+// Screenshots as WebP at 800w and 1600w (converted from the PNG sources in the same folder)
+import shoppers800 from "../assets/projectsImgs/shoppers-800.webp"
+import shoppers1600 from "../assets/projectsImgs/shoppers-1600.webp"
+import readers800 from "../assets/projectsImgs/readers-800.webp"
+import readers1600 from "../assets/projectsImgs/readers-1600.webp"
 
-export const ABOUT_TEXT = `I'm a full-stack developer in Delhi, currently working at Capital Compute. I like building features end to end, from the database and API to the screen people use. I pick up whatever tools a problem needs, and lately that has meant more work with LLMs and AI pipelines.`;
+const srcSet = (small, large) => `${small} 800w, ${large} 1600w`;
+
+export const ABOUT_TEXT = `I'm a software developer based in Delhi, currently working at Capital Compute. My work there has ranged from a Chrome screen recorder to AWS pipelines that turn legal documents into searchable, AI-ready data. Most recently that meant a lot of LLM work: embeddings, retrieval and the APIs around them.`;
 
 // Hero copy
 export const HERO = {
@@ -47,7 +49,7 @@ export const SKILLS = [
   { category: "Databases", items: ["PostgreSQL", "MongoDB", "MySQL", "Prisma"] },
   {
     category: "Cloud & Tools",
-    items: ["AWS Lambda", "S3", "SQS", "Step Functions", "Git", "GitHub", "Electron"],
+    items: ["AWS Lambda", "S3", "SQS", "Step Functions", "Docker", "Git", "GitHub", "Electron"],
   },
   // From the resume: OpenAI embeddings + document chunking + indexed retrieval (RAG)
   { category: "AI & LLMs", items: ["OpenAI", "RAG"] },
@@ -57,9 +59,10 @@ export const SKILLS = [
 export const PROJECTS = [
   {
     title: "Boardly",
-    description: "A multi-tenant Kanban project management SaaS with organization-scoped boards, lists and cards, plus activity tracking. Drag-and-drop ordering persists through validated server actions and transactional database updates. Clerk Organizations handles authentication and workspace access, and a Razorpay upgrade flow with signed webhook verification lifts the free-tier board limit.",
+    description: "A Kanban app for teams. Each organization gets its own boards, lists and cards, with an activity log of what changed. Cards drag and drop, and the new order is saved in a single database transaction. Sign-in and workspaces run on Clerk Organizations. The free plan has a board limit, and upgrading goes through Razorpay with verified webhooks.",
     tags: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Clerk", "Razorpay", "Tailwind CSS"],
     thumbnail: boardly,
+    thumbnailAlt: "Boardly placeholder graphic",
     githubLink: "https://github.com/aniket-sharma10/boardly",
     demoLink: "https://boardly-xi.vercel.app/",
   },
@@ -67,7 +70,9 @@ export const PROJECTS = [
     title: "Shoppers",
     description: "A full-stack e-commerce store with product categories and filters, Google sign-in, Razorpay payments and an admin panel for managing the store. Product images are uploaded to Firebase.",
     tags: ["React", "Redux Toolkit", "Node.js", "Express", "MongoDB", "Razorpay", "Firebase", "Tailwind CSS"],
-    thumbnail: shoppers,
+    thumbnail: shoppers1600,
+    thumbnailSrcSet: srcSet(shoppers800, shoppers1600),
+    thumbnailAlt: "Shoppers product page showing a smartwatch listing",
     githubLink: "https://github.com/aniket-sharma10/e-commerce-store",
     demoLink: "https://shoppers-aniket.vercel.app/",
   },
@@ -75,33 +80,11 @@ export const PROJECTS = [
     title: "Readers",
     description: "A blogging platform where users create, edit and delete their own posts, browse posts by others and filter by category, with a light/dark theme toggle.",
     tags: ["React", "Redux Toolkit", "Node.js", "Express", "MongoDB", "Firebase", "Tailwind CSS"],
-    thumbnail: readers,
+    thumbnail: readers1600,
+    thumbnailSrcSet: srcSet(readers800, readers1600),
+    thumbnailAlt: "Readers search results with a grid of blog post cards",
     githubLink: "https://github.com/aniket-sharma10/Readers-blog",
     demoLink: "https://readers-aniket.vercel.app/",
-  },
-  {
-    title: "Expense Tracker",
-    description: "An app for tracking income and expenses, with charts that break down spending.",
-    tags: ["React", "Chakra UI", "ApexCharts"],
-    thumbnail: expense,
-    githubLink: "https://github.com/aniket-sharma10/expense-tracker",
-    demoLink: "",
-  },
-  {
-    title: "Food Recipe",
-    description: "A recipe finder built on an external API, where users search dishes, view detailed recipes and save favorites.",
-    tags: ["React"],
-    thumbnail: foodRecipe,
-    githubLink: "https://github.com/aniket-sharma10/food-recipe",
-    demoLink: "",
-  },
-  {
-    title: "Weather App",
-    description: "A minimal weather app that shows current conditions for the user's location or a searched city.",
-    tags: ["HTML", "CSS", "JavaScript"],
-    thumbnail: weather,
-    githubLink: "https://github.com/aniket-sharma10/weather-app",
-    demoLink: "",
   },
 ];
 

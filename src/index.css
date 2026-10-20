@@ -56,10 +56,3 @@
         }
     }
 }
-
-/* The legacy wrapper keeps the old wider container until Projects and Contact are rebuilt */
-@media (min-width: 1280px) {
-    .container {
-      max-width: 1536px;
-    }
-  }

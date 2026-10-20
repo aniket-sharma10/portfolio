@@ -1,9 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
-  <rect width="1280" height="720" fill="#0f172a"/>
-  <g fill="#1e293b">
-    <rect x="160" y="200" width="280" height="360" rx="16"/>
-    <rect x="500" y="200" width="280" height="280" rx="16"/>
-    <rect x="840" y="200" width="280" height="200" rx="16"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <!-- Placeholder until a real Boardly screenshot is added. Colours mirror the canvas/surface/line/ink-3 tokens. -->
+  <rect width="1600" height="1000" fill="#11141A"/>
+  <g fill="#181C24" stroke="#222733" stroke-width="2">
+    <rect x="200" y="280" width="360" height="520" rx="20"/>
+    <rect x="620" y="280" width="360" height="400" rx="20"/>
+    <rect x="1040" y="280" width="360" height="300" rx="20"/>
   </g>
-  <text x="640" y="130" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="48" font-weight="600" text-anchor="middle">Boardly</text>
+  <g fill="#222733">
+    <rect x="232" y="320" width="296" height="72" rx="12"/>
+    <rect x="232" y="412" width="296" height="72" rx="12"/>
+    <rect x="652" y="320" width="296" height="72" rx="12"/>
+    <rect x="1072" y="320" width="296" height="72" rx="12"/>
+  </g>
+  <text x="800" y="190" fill="#858C9E" font-family="Geist, system-ui, sans-serif" font-size="56" font-weight="600" text-anchor="middle">Boardly</text>
 </svg>

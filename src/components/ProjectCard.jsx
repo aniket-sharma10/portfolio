@@ -1,129 +1,89 @@
-import React from 'react';
+import PropTypes from "prop-types";
+import { FaGithub } from "react-icons/fa";
+import ProjectFrame from "./ProjectFrame";
+import Button from "./ui/Button";
+import Tag from "./ui/Tag";
 
-const CardContainer = ({ children, className, containerClassName }) => {
-  const containerRef = React.useRef(null);
-  const [isMouseEntered, setIsMouseEntered] = React.useState(false);
+// The frame's address: the live site's host, or the repo path when there's no demo
+const addressOf = ({ demoLink, githubLink }) => {
+  const url = new URL(demoLink || githubLink);
+  return demoLink ? url.host : `${url.host}${url.pathname.replace(/\/$/, "")}`;
+};
 
-  const handleMouseMove = (e) => {
-    if (!containerRef.current) return;
-    const { left, top, width, height } = containerRef.current.getBoundingClientRect();
-    const x = (e.clientX - left - width / 2) / 25;
-    const y = (e.clientY - top - height / 2) / 25;
-    containerRef.current.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
-  };
+// Image `sizes` per variant, matching the grid in Projects.jsx (container max 1200px)
+const SIZES = {
+  featured: "(min-width: 1024px) 700px, 100vw",
+  primary: "(min-width: 768px) 50vw, 100vw",
+  compact: "(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw",
+};
 
-  const handleMouseEnter = () => {
-    setIsMouseEntered(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsMouseEntered(false);
-    if (containerRef.current) {
-      containerRef.current.style.transform = `rotateY(0deg) rotateX(0deg)`;
-    }
-  };
+// One project. Featured puts the screenshot beside the text on large screens; primary and compact stack it above.
+// No outer box: the screenshot frame is the only container. Actions sit at the bottom so rows line up.
+function ProjectCard({ project, variant, latest = false }) {
+  const { title, description, tags, thumbnail, thumbnailSrcSet, thumbnailAlt, githubLink, demoLink } = project;
+  const featured = variant === "featured";
 
   return (
-    <div
-      className={`flex items-center justify-center ${containerClassName}`}
-      style={{ perspective: '1000px' }}
+    <article
+      aria-label={title}
+      className={`group/project flex h-full flex-col ${featured ? "lg:grid lg:grid-cols-12 lg:items-center lg:gap-x-12" : ""}`}
     >
-      <div
-        ref={containerRef}
-        onMouseEnter={handleMouseEnter}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        className={`flex items-center justify-center relative transition-all border border-white/[0.3] rounded-xl duration-200 ease-linear ${className}`}
-        style={{ transformStyle: 'preserve-3d' }}
-      >
-        {children}
+      <div className={`min-w-0 ${featured ? "lg:col-span-7" : ""}`}>
+        <ProjectFrame
+          address={addressOf(project)}
+          src={thumbnail}
+          srcSet={thumbnailSrcSet}
+          sizes={SIZES[variant]}
+          alt={thumbnailAlt}
+          href={demoLink || undefined}
+        />
       </div>
-    </div>
-  );
-};
 
-const CardBody = ({ children, className }) => {
-  return (
-    <div className={`h-auto md:h-[32rem] w-96 [transform-style:preserve-3d] ${className}`}>
-      {children}
-    </div>
-  );
-};
-
-const CardItem = ({ as: Tag = 'div', children, className, translateX = 0, translateY = 0, translateZ = 0, rotateX = 0, rotateY = 0, rotateZ = 0, ...rest }) => {
-  const ref = React.useRef(null);
-  const [isMouseEntered, setIsMouseEntered] = React.useState(false);
-
-  React.useEffect(() => {
-    handleAnimations();
-  }, [isMouseEntered]);
-
-  const handleAnimations = () => {
-    if (!ref.current) return;
-    if (isMouseEntered) {
-      ref.current.style.transform = `translateX(${translateX}px) translateY(${translateY}px) translateZ(${translateZ}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg)`;
-    } else {
-      ref.current.style.transform = `translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg)`;
-    }
-  };
-
-  return (
-    <Tag
-      ref={ref}
-      className={`w-fit transition duration-200 ease-linear ${className}`}
-      {...rest}
-    >
-      {children}
-    </Tag>
-  );
-};
-
-const ProjectCard = ({ title, description, thumbnail, githubLink, demoLink }) => {
-  return (
-    <CardContainer className="inter-var">
-      <CardBody className="bg-[#021129] relative group/card hover:shadow-2xl hover:shadow-emerald-500/[0.1] border-black/[0.1] w-auto sm:w-[26rem]  h-auto md:[32rem] rounded-xl p-6 pb-12 border">
-        <CardItem
-          translateZ="50"
-          className="text-xl font-bold text-white"
-        >
-          {title}
-        </CardItem>
-        <CardItem
-          as="p"
-          translateZ="60"
-          className="text-[#bfc1c3] text-sm max-w-sm mt-2"
-        >
-          {description}
-        </CardItem>
-        <CardItem translateZ="100" className="w-full mt-4">
-          <img
-            src={thumbnail}
-            className="h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl"
-            alt="thumbnail"
-          />
-        </CardItem>
-        <div className={`flex ${demoLink ? 'justify-between' : 'justify-end'} items-center mt-8`}>
+      <div className={`mt-6 flex min-w-0 flex-1 flex-col ${featured ? "lg:col-span-5 lg:mt-0" : ""}`}>
+        {latest && <p className="mb-2 font-mono text-label uppercase text-accent">Latest</p>}
+        <h3 className={`font-semibold text-ink ${variant === "compact" ? "text-lead" : "text-h3"}`}>{title}</h3>
+        <p className="mt-3 max-w-prose text-body text-ink-2">{description}</p>
+        <ul role="list" aria-label={`${title} technologies`} className="mt-5 flex flex-wrap gap-2">
+          {tags.map((tag) => (
+            <li key={tag}>
+              <Tag>{tag}</Tag>
+            </li>
+          ))}
+        </ul>
+        <div className="mt-auto flex flex-wrap gap-3 pt-6">
           {demoLink && (
-            <a
-            href={demoLink}
-            target='_blank'
-            className="px-4 py-2 rounded-xl text-xs font-normal text-white cursor-pointer bg-transparent transition-colors duration-200 hover:bg-gray-800"
-          >
-            Try now →
-          </a>
+            <Button href={demoLink} external aria-label={`Try now: ${title} (opens in new tab)`}>
+              Try now
+            </Button>
           )}
-          <button
-            onClick={() => {
-              window.open(githubLink, '_blank');
-            }}
-            className="px-4 py-2 rounded-xl bg-white text-black text-xs font-bold cursor-pointer transition-colors duration-200 hover:bg-gray-200"
+          <Button
+            href={githubLink}
+            variant="secondary"
+            external
+            icon={<FaGithub />}
+            aria-label={`Source: ${title} on GitHub (opens in new tab)`}
           >
-            GitHub
-          </button>
+            Source
+          </Button>
         </div>
-      </CardBody>
-    </CardContainer>
+      </div>
+    </article>
   );
+}
+
+ProjectCard.propTypes = {
+  project: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+    thumbnail: PropTypes.string.isRequired,
+    thumbnailSrcSet: PropTypes.string,
+    thumbnailAlt: PropTypes.string.isRequired,
+    githubLink: PropTypes.string.isRequired,
+    demoLink: PropTypes.string,
+  }).isRequired,
+  variant: PropTypes.oneOf(["featured", "primary", "compact"]).isRequired,
+  latest: PropTypes.bool,
 };
 
 export default ProjectCard;
