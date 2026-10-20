@@ -1,32 +1,30 @@
-import hero from "../assets/hero.png";
-import { Typewriter } from "react-simple-typewriter";
+import { CONTACT, HERO } from "../data";
+import Button from "./ui/Button";
+import Container from "./ui/Container";
 
+// From md up it fills the first screen below the 64px nav; on phones it uses padding so About starts in view
 function Hero() {
   return (
-    <div className="border-b border-neutral-900 pb-4 px-4 lg:px-16 lg:mb-16">
-      <div className="flex flex-wrap ">
-        <div className="w-full lg:w-1/2">
-          <div className="flex flex-col items-center lg:items-start">
-            <h1 className="pb-8 md:pb-12 font-thin tracking-tight lg:mt-16 text-4xl sm:text-6xl lg:text-7xl">
-              Aniket Sharma
-            </h1>
-            <span className="bg-gradient-to-r from-pink-300 via-slate-500 to-purple-500 bg-clip-text text-2xl sm:text-4xl lg:text-5xl tracking-tight text-transparent">
-              <Typewriter
-                words={["I am a Full-Stack Developer."]}
-                cursor={true}
-                cursorStyle={<span className="text-purple-400">|</span>}
-                typeSpeed={40}
-                />
-            </span>
-          </div>
+    <section
+      aria-labelledby="hero-heading"
+      className="flex items-center py-24 md:min-h-[calc(100svh-4rem)]"
+    >
+      <Container className="flex flex-col items-center text-center">
+        <p className="font-mono text-label uppercase text-ink-3">
+          {HERO.role} · {CONTACT.location}
+        </p>
+        <h1 id="hero-heading" className="mt-6 text-balance font-display text-display font-normal text-ink">
+          Aniket Sharma
+        </h1>
+        <p className="mt-8 max-w-xl text-pretty text-lead text-ink-2">{HERO.lead}</p>
+        <div className="mt-10 flex flex-wrap justify-center gap-3">
+          <Button href="#projects">View projects</Button>
+          <Button href="#contact" variant="secondary">
+            Get in touch
+          </Button>
         </div>
-        <div className="w-full mt-6 lg:mt-0 lg:w-1/2 lg:p-8">
-          <div className="flex justify-center">
-            <img src={hero} className="md:w-[32rem] md:h-[32rem]" alt="Aniket Sharma" />
-          </div>
-        </div>
-      </div>
-    </div>
+      </Container>
+    </section>
   );
 }
 

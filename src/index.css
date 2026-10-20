@@ -1,10 +1,70 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root{
-    font-family: "Inter", sans-serif;
+/* Self-hosted latin subsets (SIL Open Font License), see public/fonts/README.md */
+@font-face {
+    font-family: "Geist";
+    font-style: normal;
+    font-weight: 400 600;
+    font-display: swap;
+    src: url("/fonts/geist-latin-var.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Geist Mono";
+    font-style: normal;
+    font-weight: 400 500;
+    font-display: swap;
+    src: url("/fonts/geist-mono-latin-var.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Instrument Serif";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/fonts/instrument-serif-latin-400.woff2") format("woff2");
+}
+
+/* Design tokens as RGB channels, consumed by tailwind.config.js */
+:root {
+    --paper: 245 243 238;          /* #F5F3EE */
+    --surface: 255 255 255;        /* #FFFFFF */
+    --sunk: 234 230 221;           /* #EAE6DD */
+    --ink: 22 21 15;               /* #16150F */
+    --ink-2: 85 82 74;             /* #55524A */
+    --ink-3: 110 106 97;           /* #6E6A61, never on sunk */
+    --line: 217 212 201;           /* #D9D4C9 */
+    --line-strong: 143 138 127;    /* #8F8A7F */
+    --accent: 36 64 200;           /* #2440C8 */
+    --accent-strong: 26 51 153;    /* #1A3399 */
+    --inverse: 22 21 15;           /* #16150F */
+    --inverse-fg: 245 243 238;     /* #F5F3EE */
+    --inverse-2: 169 165 155;      /* #A9A59B */
+    --inverse-accent: 141 160 245; /* #8DA0F5 */
+}
+
+@layer base {
+    /* Font family comes from theme.fontFamily.sans (Geist) via preflight */
+    body {
+        @apply bg-paper text-ink antialiased selection:bg-accent/15 selection:text-ink;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        html {
+            scroll-behavior: smooth;
+        }
+    }
+}
+
+/*
+ * TEMPORARY BRIDGE (phase 2): the legacy sections were styled for a dark background.
+ * These remap their light text colours onto the paper tokens so they stay readable.
+ * Delete each rule when its section is rebuilt, and the .container override with the last one.
+ */
+.legacy .text-blue-400 {              /* Contact links (phase 8) */
+    color: rgb(var(--accent));
 }
 
 @media (min-width: 1280px) {

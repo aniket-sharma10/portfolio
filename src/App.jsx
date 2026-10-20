@@ -6,22 +6,35 @@ import Navbar from "./components/Navbar";
 import Projects from "./components/Projects";
 import Technologies from "./components/Technologies";
 
+// The id wrappers and the .legacy container are temporary: each goes away once its section is rebuilt on <Section>
 function App() {
   return (
-    <div className="overflow-x-hidden text-neutral-300 antialiased selection:bg-slate-100 selection:text-slate-800">
-      <div className="fixed top-0 -z-10 h-full w-full">
-        <div className="absolute top-0 z-[-2] h-screen w-screen bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
-      </div>
+    <div id="top">
+      <a
+        href="#content"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-3 focus:z-50 focus:rounded-md focus:bg-ink focus:px-4 focus:py-2 focus:text-small focus:font-medium focus:text-paper focus:shadow-focus focus:outline-none"
+      >
+        Skip to content
+      </a>
 
-      <div className="container mx-auto px-4 sm:px-8">
-        <Navbar />
+      <Navbar />
+
+      <main id="content" tabIndex={-1} className="focus:outline-none">
         <Hero />
         <About />
         <Experience />
-        <Technologies />
-        <Projects />
-        <Contact />
-      </div>
+        <div className="legacy container mx-auto overflow-x-clip px-4 sm:px-8">
+          <div id="skills" className="scroll-mt-16">
+            <Technologies />
+          </div>
+          <div id="projects" className="scroll-mt-16">
+            <Projects />
+          </div>
+          <div id="contact" className="scroll-mt-16">
+            <Contact />
+          </div>
+        </div>
+      </main>
     </div>
   );
 }
