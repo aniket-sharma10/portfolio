@@ -67,7 +67,7 @@ Goal: a premium, modern, interactive developer portfolio with a distinctive visu
 
 - Subtle and purposeful: entrance reveals, hover/focus feedback, smooth transitions. Every animation should aid understanding or feedback, not exist purely for visual effect.
 - 3D or other advanced effects only where they genuinely improve the experience (e.g. a refined card tilt), never as decoration for its own sake.
-- Respect `prefers-reduced-motion`. No scroll-jacking, or motion that delays content. The only ambient effects are the floating Skills pills (4px drift, only while on screen, paused on hover, off under reduced motion), the hero wire ribbon (`src/components/effects/WireRibbon.jsx`, original WebGL; pauses off-screen and in hidden tabs, static under reduced motion) and a cursor spotlight; no other looping motion.
+- Respect `prefers-reduced-motion`. No scroll-jacking, or motion that delays content. The only ambient effects are the floating Skills pills (4px drift, only while on screen, paused on hover, off under reduced motion), the hero wire ribbon (`src/components/effects/WireRibbon.jsx`, original WebGL; pauses off-screen and in hidden tabs, static under reduced motion and when WebGL is software-rendered, e.g. no GPU) and a cursor spotlight; no other looping motion.
 
 ### Content and voice
 

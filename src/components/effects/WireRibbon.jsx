@@ -241,7 +241,12 @@ function WireRibbon({
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.ONE, gl.ONE); // additive: overlapping wires brighten toward white
 
-    const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
+    // Reduced motion, or WebGL running on the CPU (no usable GPU: SwiftShader, llvmpipe, Microsoft Basic Render),
+    // gets one still frame and no animation loop. Software-rendered frames would keep the main thread busy.
+    const prefersReduced = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
+    const debugInfo = gl.getExtension("WEBGL_debug_renderer_info");
+    const renderer = String(gl.getParameter(debugInfo ? debugInfo.UNMASKED_RENDERER_WEBGL : gl.RENDERER));
+    const reduce = prefersReduced || /swiftshader|llvmpipe|softpipe|software|basic render/i.test(renderer);
     const colors = new Map();
     const color = (name) => {
       if (!colors.has(name)) colors.set(name, tokenRgb(name));
