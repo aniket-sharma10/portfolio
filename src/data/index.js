@@ -7,10 +7,9 @@ import weather from "../assets/projectsImgs/weather.png"
 
 export const ABOUT_TEXT = `I'm a full-stack developer based in Delhi, India, working as a Software Developer (SDE-1) at Capital Compute. I build across the stack, from a Chrome screen-recording extension and FFmpeg-based video editing to serverless document workflows on AWS and retrieval pipelines built on OpenAI embeddings. Most of my work today is in TypeScript, React, Next.js, Node.js and AWS. Before that, I interned at To Let Globe, building property discovery features. I like owning a feature end to end, from the data model and APIs to the interface people use.`;
 
-// Hero copy, taken verbatim from the previous hero and ABOUT_TEXT
+// Hero copy
 export const HERO = {
   role: "Full-Stack Developer",
-  lead: "I like owning a feature end to end, from the data model and APIs to the interface people use.",
 };
 
 export const EXPERIENCE = [

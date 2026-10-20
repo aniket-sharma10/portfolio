@@ -4,7 +4,7 @@ import Tag from "./ui/Tag";
 
 function Experience() {
   return (
-    <Section id="experience" index="02" label="Experience" title="Experience">
+    <Section id="experience" title="Experience">
       <ol role="list" className="divide-y divide-line">
         {EXPERIENCE.map((job) => {
           const isCurrent = job.period.includes("Present");

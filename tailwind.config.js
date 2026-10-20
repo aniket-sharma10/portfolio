@@ -11,9 +11,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        paper: token("paper"),
+        canvas: token("canvas"),
         surface: token("surface"),
-        sunk: token("sunk"),
+        raised: token("raised"),
         ink: {
           DEFAULT: token("ink"),
           2: token("ink-2"),
@@ -25,13 +25,7 @@ export default {
         },
         accent: {
           DEFAULT: token("accent"),
-          strong: token("accent-strong"),
-        },
-        inverse: {
-          DEFAULT: token("inverse"),
-          fg: token("inverse-fg"),
-          2: token("inverse-2"),
-          accent: token("inverse-accent"),
+          2: token("accent-2"),
         },
       },
       fontFamily: {
@@ -66,9 +60,9 @@ export default {
         lg: "10px",
       },
       boxShadow: {
-        focus: "0 0 0 2px rgb(var(--paper)), 0 0 0 4px rgb(var(--accent))",
-        "focus-inverse": "0 0 0 2px rgb(var(--inverse)), 0 0 0 4px rgb(var(--inverse-accent))",
-        lift: "0 1px 2px rgb(22 21 15 / 0.04), 0 8px 24px -12px rgb(22 21 15 / 0.18)",
+        focus: "0 0 0 2px rgb(var(--canvas)), 0 0 0 4px rgb(var(--accent))",
+        // Dark-surface "lift": a soft accent glow instead of a drop shadow
+        glow: "0 0 0 1px rgb(var(--accent) / 0.25), 0 16px 40px -16px rgb(var(--accent) / 0.45)",
       },
       transitionTimingFunction: {
         out: "cubic-bezier(0.2, 0.7, 0.2, 1)",

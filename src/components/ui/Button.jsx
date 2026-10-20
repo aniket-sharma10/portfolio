@@ -3,8 +3,8 @@ import { FiArrowUpRight } from "react-icons/fi";
 import ExternalLink from "./ExternalLink";
 
 const VARIANTS = {
-  primary: "bg-ink text-paper hover:bg-ink/85",
-  secondary: "border border-line-strong text-ink hover:bg-sunk",
+  primary: "bg-ink text-canvas hover:bg-ink/85",
+  secondary: "border border-line-strong text-ink hover:bg-raised",
 };
 
 // Always a link. The before: pseudo-element pads the 40px button to a 44px hit area.

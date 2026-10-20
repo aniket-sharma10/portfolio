@@ -8,7 +8,7 @@ import ExternalLink from "./ui/ExternalLink";
 const SECTION_IDS = NAV_LINKS.map((link) => link.href.slice(1));
 
 const ICON_LINK =
-  "inline-flex h-11 w-11 items-center justify-center rounded-md text-ink-2 transition-colors duration-fast ease-out hover:bg-sunk hover:text-ink focus-visible:shadow-focus focus-visible:outline-none";
+  "inline-flex h-11 w-11 items-center justify-center rounded-md text-ink-2 transition-colors duration-fast ease-out hover:bg-raised hover:text-ink focus-visible:shadow-focus focus-visible:outline-none";
 
 function Navbar() {
   const activeId = useActiveSection(SECTION_IDS);
@@ -51,7 +51,7 @@ function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-40 h-16 border-b bg-paper transition-colors duration-fast ease-out ${
+      className={`sticky top-0 z-40 h-16 border-b bg-canvas transition-colors duration-fast ease-out ${
         scrolled || menuOpen ? "border-line" : "border-transparent"
       }`}
     >
@@ -93,7 +93,7 @@ function Navbar() {
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
             onClick={() => setMenuOpen((open) => !open)}
-            className="ml-1 inline-flex h-11 items-center rounded-md px-3 text-small font-medium text-ink transition-colors duration-fast ease-out hover:bg-sunk focus-visible:shadow-focus focus-visible:outline-none md:hidden"
+            className="ml-1 inline-flex h-11 items-center rounded-md px-3 text-small font-medium text-ink transition-colors duration-fast ease-out hover:bg-raised focus-visible:shadow-focus focus-visible:outline-none md:hidden"
           >
             {menuOpen ? "Close" : "Menu"}
           </button>

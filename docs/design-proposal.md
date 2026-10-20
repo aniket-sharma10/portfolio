@@ -1,6 +1,6 @@
 # Portfolio redesign: design proposal
 
-**Status:** Revision 2 of Direction A ("Editorial Ink") **approved** by the owner on 2026-10-20, with the action labels below. Phase 1 is implemented.
+**Status:** Revision 2 of Direction A ("Editorial Ink") **approved** by the owner on 2026-10-20, with the action labels below. Phases 1–4 and 6 are implemented on the light palette. **Revision 3 (dark variant) approved 2026-10-20** with: Aurora in the hero plus cursor spotlight, hover-glow + pop-in pills, and a native timeline. Phase R3-a (dark tokens) is implemented.
 
 **What changed in revision 2**
 - The hero summary was a structured "Currently" panel; it was later removed in favour of a minimal centred hero (see §6).
@@ -9,6 +9,92 @@
 - Scroll reveals are now optional.
 - Scope rules are explicit.
 - The implementation is phased, with per-phase checks.
+
+---
+
+## Revision 3 (approved): dark "Night" variant with richer motion
+
+The owner's feedback after phase 6 was that the light theme feels too basic. Revision 3 makes the following changes:
+- **Dark theme:** switch to a dark theme.
+- **Section numbering:** remove the `01 —` labels (**done**).
+- **Experience timeline:** rebuild Experience as a scroll-linked timeline in the style of Aceternity's Timeline.
+- **Tech pills:** give them more visual character.
+- **Background:** add an ambient background that reacts to the cursor.
+
+Everything else carries over: the typography system (Instrument Serif / Geist / Geist Mono), the grid, the shared primitives, the content rules and the section order. Because colours are CSS variables, the theme switch is mostly a token swap.
+
+### R3.1 Palette (dark)
+
+| Token | HEX | Use | Contrast on bg / surface / raised |
+|---|---|---|---|
+| `canvas` (was `paper`) | `#0A0C10` | Page background (blue-black, not pure black) | — |
+| `surface` | `#11141A` | Cards, project frames, menu panel | — |
+| `raised` (was `sunk`) | `#181C24` | Frame bars, hover fills | — |
+| `ink` | `#ECEEF3` | Headings, body | 16.9 / 15.9 / 14.7 |
+| `ink-2` | `#A7ADBB` | Descriptions, bullets | 8.7 / 8.2 / 7.6 |
+| `ink-3` | `#858C9E` | Labels, dates | 5.8 / 5.5 / 5.1 |
+| `line` | `#222733` | Hairlines, card borders | decorative |
+| `line-strong` | `#636B7E` | Secondary button outline | 3.7:1 (non-text) |
+| `accent` | `#7C93FF` | Links, focus ring, timeline beam head, active nav | 7.0 / 6.6 / 6.1 |
+| `accent-2` | `#45D6C4` | Second gradient stop (beam tail, pill hover border) | 10.9 / 10.3 / 9.5 |
+| `ribbon-1` / `ribbon-2` | `#8445FF` / `#D678FF` | **Hero ribbon only** (effect colours), never on text or UI | — |
+
+- **Gradient:** `accent → accent-2` (electric blue → aqua). It's used only for the timeline beam, the pill hover borders and the hero aurora. Text is never gradient-filled.
+- **Primary button:** `ink` fill with `canvas` text. The secondary button is a `line-strong` outline.
+- **Focus ring / hover lift:** `shadow-focus` offsets from `canvas`; the light theme's drop shadow `lift` is replaced by `shadow-glow` (a soft accent glow).
+- **Contact:** becomes a `surface` band with a 1px `accent → accent-2` gradient top rule. There's no inverse band on a dark page.
+
+### R3.2 Background
+
+| Layer | What | Where | Cost |
+|---|---|---|---|
+| **Aurora** (React Bits `Aurora`) | Soft blue/aqua/violet light that drifts toward the cursor | Hero only, faded out at its bottom edge with a mask | WebGL, no dependencies. Built in: it pauses off-screen and in hidden tabs, respects reduced motion, and caps pixel density at 2. About 480 lines, copied into `src/components/effects/`. Licence is MIT + Commons Clause (fine for a personal site; the notice must be kept). |
+| **Cursor spotlight** | A faint radial glow (accent at about 6% opacity) that follows the pointer | Whole page, fixed behind content | CSS variables updated on `pointermove` through requestAnimationFrame. No animation loop. Mouse/trackpad only (`pointer: fine`); off for touch and reduced motion. About 30 lines. |
+| *Particles* (React Bits `Particles`) | Drifting particles with constellation lines that react to the cursor | Optional alternative to Aurora in the hero | WebGL, about 880 lines. Not recommended on top of Aurora: two ambient effects compete, and a fixed full-page WebGL layer would keep the GPU busy on every scroll. |
+
+### R3.3 Experience timeline
+
+Behaviour follows Aceternity's Timeline:
+- a vertical rail with a gradient **beam that fills as you scroll**;
+- a node per job, with sticky left metadata on desktop;
+- content on the right.
+
+Implementation:
+- **Option A (recommended):** a native version of the same behaviour, using the existing scroll-listener pattern (`useActiveSection`) plus a CSS `scaleY` transform. That's about 40 lines and **no added bundle weight**.
+- **Option B:** Aceternity's source, adapted. It imports `motion/react`, whose API matches the already-installed `framer-motion@11`, so there's no new install. But nothing imports framer-motion today, so using it would add roughly 30–40 KB gzipped of JS.
+
+Both options get the same treatment:
+- each node lights up (accent ring) once the beam reaches it;
+- the current role's node gets a static glow ring;
+- with reduced motion, the rail is drawn fully and statically;
+- the role stays an `h3` and the content is unchanged.
+
+### R3.4 Tech pills
+
+**Recommended:**
+- **At rest:** dark `surface` pills with a hairline border.
+- **On hover/focus:** an `accent → accent-2` gradient border and a slight lift (−2px).
+- **Entrance:** a one-time staggered pop-in when each job (or skill row) scrolls into view.
+
+**Not recommended:**
+- **Constant shaking or floating:** continuous motion next to text people are reading pulls attention away from the bullets. It also fails WCAG 2.2.2 (moving content lasting over 5s needs a pause control) and can trigger motion sensitivity.
+- **A different gradient per pill:** it brings back the many-colour noise removed from the old Skills tiles.
+
+### R3.5 Guardrails kept
+
+- Effects are on the hero, the timeline and pills only. Body text never moves.
+- `prefers-reduced-motion` disables the aurora animation, the spotlight, the beam animation and the pop-ins.
+- WebGL fails gracefully: if `getContext` returns null, the hero shows a static CSS gradient.
+- `CLAUDE.md`'s "Design direction → Avoid" list (gradients, glows, particles) will be updated to match whatever is approved, so the project instructions don't contradict the build.
+
+### R3.6 Phase plan (replaces the remaining phases)
+
+| # | Phase | Files |
+|---|---|---|
+| R3-a ✅ | Dark tokens: swap the CSS variables and rename `paper→canvas` / `sunk→raised`, drop the `inverse` tokens and tones in the config and in existing components | `src/index.css`, `tailwind.config.js`, `Navbar`, `Hero`, `About`, `Experience`, `ui/*` |
+| R3-b ✅ | Background: hero **wire ribbon** (owner's pick over the aurora, 2026-10-20). It's an original WebGL effect inspired by React Bits Pro *Interference Ribbons*, in purple `ribbon-1` `#8445FF` and orchid `ribbon-2` `#D678FF`, with white pulses on hover and a burst on click. Flashes start at the pointer's point on the ribbon and travel both ways along the wire. Both trigger only when the pointer is on the ribbon itself (hit-tested against its current shape), and a click adds flashes only, with no widening. Plus the page-wide cursor spotlight. The aurora and the temporary `/ribbons` route were removed |
+| R3-c | Experience timeline and pill style | `Experience.jsx`, `ui/Tag.jsx` (or a new `ui/Pill.jsx`), `src/hooks/` |
+| R3-d → | Then Skills, Projects, Contact and QA as before, on the dark tokens | as in §11 |
 
 ---
 
@@ -167,7 +253,8 @@ The "Currently" panel was removed because it repeated the Experience and Skills 
 - **Height:**
   - From `md` up, the hero fills the first screen below the nav (`min-h-[calc(100svh-4rem)]`), with the content vertically centred.
   - On phones it uses `py-24`, so About starts within the first screen.
-- **Data:** `HERO.role` (from the previous typewriter line) and `HERO.lead` (`ABOUT_TEXT`'s last sentence, verbatim). The location comes from `CONTACT.location`.
+- **Content:** label (`HERO.role` · `CONTACT.location`), name, and the two buttons. The lead line was removed at the owner's request (2026-10-20).
+- **Legibility over the ribbon:** the label uses `ink-2` with a canvas-coloured `text-shadow` halo.
 - **No image and no motion.** The LCP element is the `h1`.
 
 ### About
