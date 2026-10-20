@@ -22,7 +22,7 @@ There is no test suite. Validate every change with `npm run lint` and `npm run b
 - `src/assets/` — `hero.png` and `projectsImgs/*.png`, imported as ES modules.
 - `src/index.css` — Tailwind directives, `@font-face` for self-hosted fonts in `public/fonts/` (Geist, Geist Mono, Instrument Serif), colour tokens as CSS variables, wider `.container` at ≥1280px (legacy sections only).
 - `tailwind.config.js` — design tokens (colours, fonts, type scale, spacing, radii, shadows, motion) mapped to the CSS variables.
-- `src/components/ui/` — shared primitives (`Section`, `SectionHeading`, `Container`, `Button`, `TextLink`, `Tag`, `ExternalLink`); `src/hooks/` — `useActiveSection`.
+- `src/components/ui/` — shared primitives (`Section`, `SectionHeading`, `Container`, `Button`, `TextLink`, `Tag` (pill), `ExternalLink`); `src/components/effects/` — `WireRibbon` (hero), `Spotlight` (cursor glow); `src/components/TimelineEntry.jsx` — one Experience job; `src/hooks/` — `useActiveSection`, `useTimelineProgress`, `useRevealOnce`.
 
 ## Conventions
 

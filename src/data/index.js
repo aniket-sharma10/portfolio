@@ -5,7 +5,7 @@ import foodRecipe from "../assets/projectsImgs/foodRecipe.png"
 import expense from "../assets/projectsImgs/expense.png"
 import weather from "../assets/projectsImgs/weather.png"
 
-export const ABOUT_TEXT = `I'm a full-stack developer based in Delhi, India, working as a Software Developer (SDE-1) at Capital Compute. I build across the stack, from a Chrome screen-recording extension and FFmpeg-based video editing to serverless document workflows on AWS and retrieval pipelines built on OpenAI embeddings. Most of my work today is in TypeScript, React, Next.js, Node.js and AWS. Before that, I interned at To Let Globe, building property discovery features. I like owning a feature end to end, from the data model and APIs to the interface people use.`;
+export const ABOUT_TEXT = `I'm a full-stack developer in Delhi, currently working at Capital Compute. I like building features end to end, from the database and API to the screen people use. I pick up whatever tools a problem needs, and lately that has meant more work with LLMs and AI pipelines.`;
 
 // Hero copy
 export const HERO = {
@@ -25,7 +25,7 @@ export const EXPERIENCE = [
       "Built serverless legal-document workflows on AWS Lambda, S3, SQS and Step Functions for structured extraction, docket enrichment, attorney briefings, tasks and legal drafts.",
       "Developed legal-data ingestion using document chunking, OpenAI embeddings and indexed retrieval, so case strategies are grounded in case law and official legal sources.",
     ],
-    tags: ["Node.js", "Prisma", "FFmpeg", "AWS Lambda", "S3", "SQS", "Step Functions", "OpenAI"],
+    tags: ["TypeScript", "Next.js", "Node.js", "AWS Lambda", "Step Functions", "S3", "SQS", "OpenAI"],
   },
   {
     role: "Full Stack Developer Intern",
@@ -36,7 +36,7 @@ export const EXPERIENCE = [
       "Built property discovery features including navigation, filtering, forms and image-upload workflows.",
       "Improved form validation and upload handling to reduce submission errors.",
     ],
-    tags: ["Next.js", "Node.js", "Express", "MongoDB"],
+    tags: ["TypeScript", "React", "Next.js", "Node.js", "Express", "MongoDB"],
   },
 ];
 
